@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Local OpenClaw and WhatsApp data
+.openclaw/
+auth_info/
+auth_info_*/
+baileys_store.json
+**/baileys_store.json
+
+# Credentials, tokens and local configuration
+.env
+.env.*
+*.token
+*.secret
+credentials*
+creds.json
+
+# Generated backups and temporary files
+*.bak
+*.bak-*
+*.tmp
+*.log
+
+# macOS and editor files
+.DS_Store
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
