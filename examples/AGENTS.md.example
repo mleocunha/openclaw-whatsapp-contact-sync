@@ -1,0 +1,28 @@
+## WhatsApp contact resolution and safe sending
+
+When the user asks to send a WhatsApp message to a person by name:
+
+1. Query the local Baileys contact store first:
+
+   ```bash
+   node ~/.openclaw/workspace/check_contacts.js "[NAME]"
+   ```
+
+2. Interpret the JSON result:
+
+   - `count == 0`: do not send. Tell the user no matching contact was found and ask for a fuller name or exact number.
+   - `count == 1`: use the returned JID as the target.
+   - `count > 1`: do not send. Present a numbered list containing display name and phone/JID, then ask the user to choose.
+
+3. Only after the recipient is unambiguous, send with:
+
+   ```bash
+   openclaw message send \
+     --channel whatsapp \
+     --target "[JID]" \
+     --message "[MESSAGE]"
+   ```
+
+4. Never guess between multiple contacts, never silently choose the first partial match, and never expose the complete contact store in conversation.
+
+5. For recurring reminders or follow-ups, confirm the recipient and message before creating the schedule.
